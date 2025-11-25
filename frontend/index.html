@@ -11,9 +11,8 @@
             padding: 0;
             font-family: 'Inter', sans-serif;
 
-            /* Your image */
-            background: 
-                linear-gradient(rgba(144, 238, 144, 0.35), rgba(144, 238, 144, 0.35)),  /* light green filter */
+            background:
+                linear-gradient(rgba(144, 238, 144, 0.35), rgba(144, 238, 144, 0.35)),
                 url("/mnt/data/2fa1e82d-fee7-4a7c-abd5-613eaf8af1db.png");
 
             background-size: cover;
@@ -21,6 +20,15 @@
             background-repeat: no-repeat;
             height: 100vh;
             overflow: hidden;
+        }
+
+        /* TOP-RIGHT LOGO */
+        .top-logo {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            width: 120px;
+            z-index: 20;
         }
 
         .container {
@@ -90,7 +98,7 @@
             cursor: pointer;
         }
 
-        /* === FALLING TEXT EFFECT (UPDATED) === */
+        /* === FALLING TEXT === */
         .falling-text {
             position: absolute;
             top: 0;
@@ -105,10 +113,10 @@
         .fall {
             position: absolute;
             top: -60px;
-            color: #8b5a2b; /* darker brown */
-            font-size: 28px; /* increased size */
-            opacity: 0.9;
+            color: #5a3b10;   /* darker brown text */
+            font-size: 28px;
             font-weight: 700;
+            opacity: 0.95;
             animation: fallAnimation linear infinite;
         }
 
@@ -121,10 +129,14 @@
 
 <body>
 
+    <!-- Top-Right Logo -->
+    <img src="/mnt/data/8ae13e99-4449-4a6a-b23d-c965904af10b.png" class="top-logo">
+
     <!-- Falling Rain Text Layer -->
     <div class="falling-text" id="fallContainer"></div>
 
     <div class="container">
+
         <div class="header">
             <div class="exam-badge">
                 <i class="fas fa-shield-alt"></i> AJA Coding Tutor
@@ -157,6 +169,7 @@
         function createDrop() {
             const drop = document.createElement("div");
             drop.classList.add("fall");
+
             drop.innerText = "AJA Consulting Services LLP";
 
             drop.style.left = Math.random() * 90 + "vw";
