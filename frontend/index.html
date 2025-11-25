@@ -1,187 +1,195 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AJA Coding Tutor</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>AJA Coding Tutor</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        /* === BACKGROUND IMAGE + LIGHT GREEN OVERLAY === */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
+<style>
 
-            background:
-                linear-gradient(rgba(144, 238, 144, 0.35), rgba(144, 238, 144, 0.35)),
-                url("/mnt/data/2fa1e82d-fee7-4a7c-abd5-613eaf8af1db.png");
+/* TOP-RIGHT LOGO */
+.top-right-logo {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+}
 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            overflow: hidden;
-        }
+.top-right-logo img {
+    width: 90px;      /* adjust size if needed */
+    height: auto;
+}
 
-        /* TOP-RIGHT LOGO */
-        .top-logo {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            width: 120px;
-            z-index: 20;
-        }
+/* === BACKGROUND IMAGE + LIGHT GREEN OVERLAY === */
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100%;
-            position: relative;
-            z-index: 10;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
 
-        form {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 18px;
-            width: 420px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
+    background:
+        linear-gradient(rgba(144, 238, 144, 0.35), rgba(144, 238, 144, 0.35)),
+        url("/mnt/data/2fa1e82d-fee7-4a7c-abd5-613eaf8af1db.png");
 
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: hidden;
+}
 
-        .exam-badge {
-            background: #4f46e5;
-            color: white;
-            padding: 7px 22px;
-            font-size: 0.9rem;
-            border-radius: 50px;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+}
 
-        h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(to right, #4f46e5, #6c5ce7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 18px;
+    width: 420px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
 
-        label {
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: block;
-        }
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 17px;
-        }
+.exam-badge {
+    background: #4f46e5;
+    color: white;
+    padding: 7px 22px;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
 
-        .next-btn {
-            width: 100%;
-            background: #4f46e5;
-            padding: 13px;
-            color: white;
-            font-weight: 700;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(to right, #4f46e5, #6c5ce7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        /* === FALLING TEXT === */
-        .falling-text {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
-        }
+label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
 
-        .fall {
-            position: absolute;
-            top: -60px;
-            color: #5a3b10;   /* darker brown text */
-            font-size: 28px;
-            font-weight: 700;
-            opacity: 0.95;
-            animation: fallAnimation linear infinite;
-        }
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 17px;
+}
 
-        @keyframes fallAnimation {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(110vh); opacity: 0; }
-        }
-    </style>
+.next-btn {
+    width: 100%;
+    background: #4f46e5;
+    padding: 13px;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* === FALLING TEXT EFFECT === */
+.falling-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.fall {
+    position: absolute;
+    top: -60px;
+    color: #8b5a2b;
+    font-size: 28px;
+    opacity: 0.9;
+    font-weight: 700;
+    animation: fallAnimation linear infinite;
+}
+
+@keyframes fallAnimation {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- Top-Right Logo -->
-    <img src="/mnt/data/8ae13e99-4449-4a6a-b23d-c965904af10b.png" class="top-logo">
+<!-- ✅ TOP RIGHT LOGO -->
+<div class="top-right-logo">
+    <img src="/mnt/data/dc292aee-a217-4032-8dc1-7514efa789e3.png" alt="AJA Logo">
+</div>
 
-    <!-- Falling Rain Text Layer -->
-    <div class="falling-text" id="fallContainer"></div>
+<!-- Falling Rain Text Layer -->
+<div class="falling-text" id="fallContainer"></div>
 
-    <div class="container">
-
-        <div class="header">
-            <div class="exam-badge">
-                <i class="fas fa-shield-alt"></i> AJA Coding Tutor
-            </div>
-            <h1>DevOps Interview Test</h1>
+<div class="container">
+    <div class="header">
+        <div class="exam-badge">
+            <i class="fas fa-shield-alt"></i> AJA Coding Tutor
         </div>
-
-        <form action="/start" method="POST">
-            <label>Full Name</label>
-            <input type="text" name="name" required>
-
-            <label>Gender</label>
-            <select name="gender" required>
-                <option value="">Select Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Prefer not to say</option>
-            </select>
-
-            <label>Email Address</label>
-            <input type="email" name="email" required>
-
-            <button class="next-btn">Start Exam</button>
-        </form>
+        <h1>DevOps Interview Test</h1>
     </div>
 
-    <script>
-        const container = document.getElementById("fallContainer");
+    <form action="/start" method="POST">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
 
-        function createDrop() {
-            const drop = document.createElement("div");
-            drop.classList.add("fall");
+        <label>Gender</label>
+        <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Prefer not to say</option>
+        </select>
 
-            drop.innerText = "AJA Consulting Services LLP";
+        <label>Email Address</label>
+        <input type="email" name="email" required>
 
-            drop.style.left = Math.random() * 90 + "vw";
-            drop.style.animationDuration = (4 + Math.random() * 5) + "s";
+        <button class="next-btn">Start Exam</button>
+    </form>
+</div>
 
-            container.appendChild(drop);
+<script>
 
-            setTimeout(() => drop.remove(), 9000);
-        }
+const container = document.getElementById("fallContainer");
 
-        setInterval(createDrop, 700);
-    </script>
+function createDrop() {
+    const drop = document.createElement("div");
+    drop.classList.add("fall");
+    drop.innerText = "AJA Consulting Services LLP";
 
+    drop.style.left = Math.random() * 90 + "vw";
+    drop.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+    container.appendChild(drop);
+
+    setTimeout(() => drop.remove(), 9000);
+}
+
+setInterval(createDrop, 700);
+
+</script>
 </body>
 </html>
