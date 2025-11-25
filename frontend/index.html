@@ -3,86 +3,238 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DevOps Interview Test - AJA Consulting</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>AJA Coding Tutor — Ace Your DevOps Interview</title>
   <style>
-    :root {
-      --primary: #5C40FF;
-      --secondary: #6B46C1;
-      --light: #F9FAFB;
-      --dark: #111827;
-      --bg: linear-gradient(135deg, #E0F7FA 0%, #FFFFFF 100%);
-      --card-bg: #FFFFFF;
-      --shadow: 0 4px 20px rgba(0,0,0,0.05);
-      --radius: 12px;
-      --transition: all 0.3s ease;
+    /* === Global Reset & Base === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
       min-height: 100vh;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      color: var(--dark);
-      position: relative;
       overflow-x: hidden;
     }
 
-    .header {
-      text-align: center;
-      margin-bottom: 2rem;
-      position: absolute;
-      top: 20px;
+    /* === RAIN TEXT EFFECT === */
+    #rain-container {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      z-index: 10;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
     }
 
-    .logo-text {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #6B46C1;
-      margin: 0;
+    .rain-text {
+      position: absolute;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 0.85rem;
+      opacity: 0.25;
+      color: #6e8efb;
+      white-space: nowrap;
+      transform: rotate(-3deg);
+      animation: fall 15s linear infinite;
+      text-shadow: 0 0 5px rgba(110, 142, 251, 0.6);
     }
 
-    .badge {
-      display: inline-block;
-      background: var(--primary);
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(-3deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.25;
+      }
+      90% {
+        opacity: 0.25;
+      }
+      100% {
+        transform: translateY(100vh) rotate(-3deg);
+        opacity: 0;
+      }
+    }
+
+    /* === HERO BANNER === */
+    .hero-banner {
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
       color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+      width: 100%;
+      max-width: 800px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .brand-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-badge {
       font-size: 0.8rem;
-      margin-left: 10px;
-      font-weight: 500;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .brand-badge.consulting {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .brand-badge.tutor {
+      background: #ff6b6b;
+      color: white;
     }
 
     .title {
-      font-size: 2rem;
-      color: var(--primary);
-      font-weight: 700;
-      margin: 1rem 0;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin: 0.5rem 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      animation: float 3s ease-in-out infinite;
     }
 
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    /* === FORM CARD === */
     .form-card {
-      background: var(--card-bg);
-      padding: 2rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      width: 100%;
-      max-width: 400px;
-      animation: fadeInUp 0.6s ease;
-      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: -2rem auto 2rem;
+      transition: all 0.3s ease;
+      transform: perspective(1000px) rotateX(0deg);
+      animation: slideIn 0.8s ease-out 0.2s both;
     }
 
+    .form-card:hover {
+      transform: perspective(1000px) rotateX(-4deg) scale(1.015);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .form-card h2 {
+      font-size: 1.8rem;
+      color: #4a4a4a;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: #6e8efb;
+      box-shadow: 0 0 0 3px rgba(110, 142, 251, 0.2);
+    }
+
+    .start-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #6e8efb, #a777e3);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(110, 142, 251, 0.3);
+      margin-top: 0.5rem;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(110, 142, 251, 0.4);
+      background: linear-gradient(135deg, #5d7ceb, #9a67d8);
+    }
+
+    /* === FOOTER === */
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      color: #6c757d;
+      font-size: 0.9rem;
+      border-top: 1px solid #dee2e6;
+      width: 100%;
+      max-width: 800px;
+      border-radius: 0 0 20px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .footer a {
+      color: #6e8efb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+      color: #a777e3;
+    }
+
+    /* === ANIMATIONS === */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
@@ -90,157 +242,158 @@
       }
     }
 
-    .form-group {
-      margin-bottom: 1.5rem;
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
     }
 
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: #333;
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    input, select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #D1D5DB;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: var(--transition);
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .hero-banner {
+        padding: 2.5rem 1.5rem;
+      }
+      .title {
+        font-size: 2rem;
+      }
+      .subtitle {
+        font-size: 1rem;
+      }
+      .form-card {
+        padding: 1.8rem;
+        margin: -1.5rem auto 1.5rem;
+      }
+      .start-btn {
+        font-size: 1rem;
+      }
+      .rain-text {
+        font-size: 0.7rem;
+      }
+      .brand-badges {
+        gap: 0.5rem;
+        flex-direction: column;
+        align-items: center;
+      }
     }
 
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(92, 64, 255, 0.2);
-    }
-
-    .btn-start {
-      width: 100%;
-      padding: 12px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-start:hover {
-      background: var(--secondary);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(92, 64, 255, 0.3);
-    }
-
-    footer {
-      position: absolute;
-      bottom: 10px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #6B7280;
-      width: 100%;
-    }
-
-    /* Optional: Dark mode */
-    body.dark-mode {
-      background: #111827;
-      color: white;
-    }
-
-    body.dark-mode .form-card {
-      background: #1F2937;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-
-    body.dark-mode input, body.dark-mode select {
-      background: #374151;
-      border-color: #4B5563;
-      color: white;
-    }
-
-    body.dark-mode .btn-start {
-      background: #6B46C1;
-    }
-
-    body.dark-mode .btn-start:hover {
-      background: #5C40FF;
-    }
-
-    .toggle-theme {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid #ddd;
-      padding: 8px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.2rem;
-      z-index: 100;
-    }
-
-    body.dark-mode .toggle-theme {
-      background: rgba(31,41,55,0.9);
-      color: white;
+    @media (max-width: 480px) {
+      .hero-banner {
+        padding: 2rem 1rem;
+      }
+      .title {
+        font-size: 1.7rem;
+      }
+      .form-card {
+        padding: 1.5rem;
+      }
+      .rain-text {
+        font-size: 0.65rem;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- RAIN EFFECT CONTAINER -->
+  <div id="rain-container"></div>
 
-  <div class="toggle-theme" onclick="toggleTheme()">☀️</div>
-
-  <div class="header">
-    <h1 class="logo-text">AJA Consulting Services LLP <span class="badge">AJA Coding Tutor</span></h1>
-    <h2 class="title">DevOps Interview Test</h2>
+  <!-- HERO BANNER -->
+  <div class="hero-banner">
+    <div class="hero-content">
+      <div class="brand-badges">
+        <span class="brand-badge consulting">AJA Consulting Services LLP</span>
+        <span class="brand-badge tutor">AJA Coding Tutor</span>
+      </div>
+      <h1 class="title">🚀 Ace Your DevOps Interview</h1>
+      <p class="subtitle">Practice real-world scenarios in minutes — no fluff, just results.</p>
+    </div>
   </div>
 
+  <!-- FORM CARD -->
   <div class="form-card">
-    <form id="examForm">
-      <div class="form-group">
-        <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" required placeholder="Enter your full name" />
+    <h2>🎯 Start Your DevOps Challenge</h2>
+    <form id="exam-form">
+      <div class="input-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" placeholder="Enter your full name" required />
       </div>
 
-      <div class="form-group">
+      <div class="input-group">
         <label for="gender">Gender</label>
         <select id="gender" required>
-          <option value="" disabled selected>Select Gender</option>
+          <option value="">Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="non-binary">Non-Binary</option>
           <option value="other">Other</option>
-          <option value="prefer-not-to-say">Prefer not to say</option>
         </select>
       </div>
 
-      <div class="form-group">
+      <div class="input-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" required placeholder="you@example.com" />
+        <input type="email" id="email" placeholder="you@example.com" required />
       </div>
 
-      <button type="submit" class="btn-start">Start Exam</button>
+      <button type="submit" class="start-btn">▶️ Start Exam</button>
     </form>
   </div>
 
-  <footer>© 2025 AJA Consulting Services LLP | Privacy Policy</footer>
+  <!-- FOOTER -->
+  <footer class="footer">
+    © 2025 AJA Consulting Services LLP | <a href="#">Privacy Policy</a>
+  </footer>
 
+  <!-- Rain Effect & Form Script -->
   <script>
-    function toggleTheme() {
-      const body = document.body;
-      const toggle = document.querySelector('.toggle-theme');
-      
-      if (body.classList.contains('dark-mode')) {
-        body.classList.remove('dark-mode');
-        toggle.textContent = '☀️';
-      } else {
-        body.classList.add('dark-mode');
-        toggle.textContent = '🌙';
+    // Create falling rain text effect
+    function createRainText() {
+      const container = document.getElementById('rain-container');
+      const texts = [
+        'AJA Consulting Services LLP',
+        'AJA Coding Tutor',
+        'DevOps Interview',
+        'DevOps Practice Made Easy',
+        'Real Scenarios. Real Results.'
+      ];
+
+      // Create 20 rain elements
+      for (let i = 0; i < 20; i++) {
+        const rain = document.createElement('div');
+        rain.className = 'rain-text';
+        rain.textContent = texts[Math.floor(Math.random() * texts.length)];
+
+        // Random horizontal position
+        rain.style.left = `${Math.random() * 100}%`;
+        
+        // Random start delay
+        rain.style.animationDelay = `${Math.random() * 10}s`;
+
+        // Random speed (10s to 20s)
+        const duration = 10 + Math.random() * 10;
+        rain.style.animationDuration = `${duration}s`;
+
+        container.appendChild(rain);
       }
     }
-  </script>
 
+    // Initialize rain on load
+    window.addEventListener('load', createRainText);
+
+    // Form submission
+    document.getElementById('exam-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('✅ Simulated exam start! In a real app, this would redirect to your DevOps test.');
+      // window.location.href = '/exam';
+    });
+  </script>
 </body>
 </html>
