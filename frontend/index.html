@@ -5,12 +5,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* === BACKGROUND IMAGE FROM YOUR FILE === */
+        /* === BACKGROUND IMAGE + LIGHT GREEN OVERLAY === */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            background: url("/mnt/data/2fa1e82d-fee7-4a7c-abd5-613eaf8af1db.png");
+
+            /* Your image */
+            background: 
+                linear-gradient(rgba(144, 238, 144, 0.35), rgba(144, 238, 144, 0.35)),  /* light green filter */
+                url("/mnt/data/2fa1e82d-fee7-4a7c-abd5-613eaf8af1db.png");
+
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -18,7 +23,6 @@
             overflow: hidden;
         }
 
-        /* Container Center */
         .container {
             display: flex;
             justify-content: center;
@@ -29,7 +33,6 @@
             z-index: 10;
         }
 
-        /* Card */
         form {
             background: white;
             padding: 2.5rem;
@@ -87,7 +90,7 @@
             cursor: pointer;
         }
 
-        /* === FALLING TEXT EFFECT === */
+        /* === FALLING TEXT EFFECT (UPDATED) === */
         .falling-text {
             position: absolute;
             top: 0;
@@ -101,10 +104,11 @@
 
         .fall {
             position: absolute;
-            top: -50px;
-            color: #c9a27c; /* light brown */
-            font-size: 22px;
-            opacity: 0.8;
+            top: -60px;
+            color: #8b5a2b; /* darker brown */
+            font-size: 28px; /* increased size */
+            opacity: 0.9;
+            font-weight: 700;
             animation: fallAnimation linear infinite;
         }
 
@@ -120,9 +124,7 @@
     <!-- Falling Rain Text Layer -->
     <div class="falling-text" id="fallContainer"></div>
 
-    <!-- Main Container -->
     <div class="container">
-
         <div class="header">
             <div class="exam-badge">
                 <i class="fas fa-shield-alt"></i> AJA Coding Tutor
@@ -150,7 +152,6 @@
     </div>
 
     <script>
-        // Create repeated falling text
         const container = document.getElementById("fallContainer");
 
         function createDrop() {
@@ -166,7 +167,7 @@
             setTimeout(() => drop.remove(), 9000);
         }
 
-        setInterval(createDrop, 800);
+        setInterval(createDrop, 700);
     </script>
 
 </body>
