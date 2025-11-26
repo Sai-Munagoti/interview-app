@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>Exam Analytics</h1>
+
+<canvas id="chart1" width="400" height="200"></canvas>
+
+<script>
+    const labels = {{ labels | safe }};
+    const values = {{ values | safe }};
+
+    new Chart(document.getElementById("chart1"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Scores",
+                data: values,
+                backgroundColor: "#3498db"
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>
