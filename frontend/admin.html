@@ -1,36 +1,114 @@
-<!-- templates/admin.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Dashboard - DevOps Exam</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h2>Admin Dashboard</h2>
-        <img src="{{ url_for('static', filename='admin-banner.jpg') }}" class="banner" alt="Admin Banner">
-        <p>All User Submissions</p>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
 
-        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; margin-top: 20px; text-align: left;">
-            <thead style="background-color: #e0e0e0;">
-                <tr>
-                    <th>Username</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in records %}
-                <tr>
-                    <td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td><b>{{ row[3] }}</b> / 15</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            cursor: pointer;
+            background: #2c3e50;
+            color: white;
+        }
+
+        #search {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 40%;
+            font-size: 16px;
+        }
+    </style>
+
+    <script>
+        function searchTable() {
+            const input = document.getElementById("search").value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(input)
+                    ? ""
+                    : "none";
+            });
+        }
+
+        function sort(n) {
+            const table = document.getElementById("adminTable");
+            let switching = true, dir = "asc", switchcount = 0;
+
+            while (switching) {
+                switching = false;
+                let rows = table.rows;
+
+                for (let i = 1; i < rows.length - 1; i++) {
+                    let shouldSwitch = false;
+                    let x = rows[i].getElementsByTagName("TD")[n];
+                    let y = rows[i+1].getElementsByTagName("TD")[n];
+
+                    if ((dir === "asc" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) ||
+                        (dir === "desc" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase())) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+<h1>Admin Dashboard</h1>
+
+<input id="search" onkeyup="searchTable()" placeholder="Search by name or email...">
+
+<table id="adminTable">
+    <thead>
+        <tr>
+            <th onclick="sort(0)">Username</th>
+            <th onclick="sort(1)">Gender</th>
+            <th onclick="sort(2)">Email</th>
+            <th onclick="sort(3)">Score</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for row in records %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 </body>
 </html>
