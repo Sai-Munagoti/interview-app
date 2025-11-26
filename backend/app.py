@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, session, make_response
+from flask import Flask, render_template, request, redirect, url_for, session, make_response, render_template_string, jsonify
 import random
 import mysql.connector
 from questions import questions
+from devops_questions import devops_questions   # <-- new import (place devops_questions.py next to this app.py)
 import os
 from io import BytesIO
 from datetime import datetime
 from xhtml2pdf import pisa
-from flask import render_template_string
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'devops-exam-secret-key')
@@ -27,6 +27,20 @@ def read_certificate_template():
 def index():
     return render_template('index.html')
 
+# New route: DevOps Q&A page (renders HTML)
+@app.route('/devops')
+def devops_page():
+    """
+    Serves a simple page that lists DevOps interview Q&A (not part of the exam).
+    Template: templates/devops.html
+    """
+    return render_template('devops.html', devops_questions=devops_questions)
+
+# Optional API: return JSON list of DevOps Q&A
+@app.route('/devops/api')
+def devops_api():
+    return jsonify(devops_questions)
+
 @app.route('/start', methods=['POST'])
 def start_exam():
     session['name'] = request.form['name']
@@ -34,6 +48,7 @@ def start_exam():
     session['email'] = request.form['email']
     
     # Select 15 random questions and store in session
+    # (Ensure 'questions' list has at least 15 items)
     selected_questions = random.sample(questions, 15)
     for i, q in enumerate(selected_questions):
         q['index'] = i  # Add unique index to each question
@@ -61,16 +76,16 @@ def submit_exam():
         score = 0
         for i, q in enumerate(session['questions']):
             user_answer = request.form.get(f'question_{i}')
-            if user_answer == q['answer']:
+            if user_answer == q.get('answer'):
                 score += 1
 
         cursor.execute(
             "INSERT INTO results (username, gender, email, score) VALUES (%s, %s, %s, %s)",
-            (session['name'], session['gender'], session['email'], score)
+            (session.get('name'), session.get('gender'), session.get('email'), score)
         )
         db.commit()
         
-        # Store name in session for certificate generation
+        # Store name and score in session for certificate generation
         session['exam_score'] = score
         
         return render_template('result.html', 
@@ -108,6 +123,7 @@ def download_certificate():
         # Create response
         response = make_response(pdf.read())
         response.headers['Content-Type'] = 'application/pdf'
+        # safe f-string - inner quotes are fine here
         response.headers['Content-Disposition'] = f'attachment; filename=devops_certificate_{name.replace(" ", "_")}.pdf'
         
         return response
