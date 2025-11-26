@@ -18,8 +18,8 @@ services:
         condition: service_healthy
     volumes:
       - ./backend:/app
-      - ./frontend:/app/templates
-      - ./static:/app/static        # NEW FIXED STATIC FOLDER MOUNT
+      - ./frontend:/frontend      # FIXED
+      - ./static:/static          # FIXED
 
   mysql:
     image: mysql:5.7
