@@ -7,18 +7,19 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - FLASK_APP=app.py
-      - FLASK_ENV=production
-      - MYSQL_HOST=mysql
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=rootpass
-      - MYSQL_DATABASE=devops_exam
+      FLASK_APP: app.py
+      FLASK_ENV: production
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootpass
+      MYSQL_DATABASE: devops_exam
     depends_on:
       mysql:
         condition: service_healthy
     volumes:
       - ./backend:/app
       - ./frontend:/app/templates
+      - ./static:/app/static        # NEW FIXED STATIC FOLDER MOUNT
 
   mysql:
     image: mysql:5.7
