@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            text-align: center;
+            padding: 40px;
+            border: 8px solid #2c3e50;
+        }
+
+        h1 {
+            font-size: 38px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .name {
+            font-size: 32px;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #1b2631;
+        }
+
+        .text {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Certificate of Achievement</h1>
+
+<p class="text">This is to certify that</p>
+
+<p class="name">{{ name }}</p>
+
+<p class="text">has successfully completed the DevOps Examination.</p>
+
+<p class="text">
+    Score Achieved: <strong>{{ score }}/15</strong><br>
+    Date: {{ date }}
+</p>
+
+<p class="footer">DevOps Training & Certification Board</p>
+
+</body>
+</html>
