@@ -1,0 +1,33 @@
+<!-- frontend/devops.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>DevOps Interview Questions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f7fafc;color:#111;padding:24px;}
+    .container{max-width:900px;margin:0 auto;}
+    h1{color:#374151}
+    .qa{background:#fff;padding:16px;border-radius:10px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    .q{font-weight:700;color:#0f172a}
+    .a{margin-top:6px;color:#334155}
+    .back{display:inline-block;margin-top:14px;padding:10px 14px;background:#e6eef8;border-radius:8px;text-decoration:none;color:#0f172a}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>DevOps Interview Questions & Answers</h1>
+    <p>Reference page — not part of the exam.</p>
+
+    {% for item in devops_questions %}
+      <div class="qa">
+        <div class="q">Q: {{ item.question }}</div>
+        <div class="a"><strong>A:</strong> {{ item.answer }}</div>
+      </div>
+    {% endfor %}
+
+    <a class="back" href="{{ url_for('index') }}">← Back to Home</a>
+  </div>
+</body>
+</html>
